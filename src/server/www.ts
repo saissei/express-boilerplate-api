@@ -3,10 +3,9 @@
 /**
  * Module dependencies.
  */
-
-const app = require('../app')
-const debug = require('debug')('express-boilerplate-api:server')
-const http = require('http')
+import { default as app } from './app'
+import * as debug from 'debug'
+import * as http from 'http'
 
 /**
  * Get port from environment and store in Express.

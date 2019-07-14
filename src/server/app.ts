@@ -3,16 +3,39 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 
-const apiRouter = require('../routes/api')
+import { router as apiRouter } from '../routes/api'
 
-const app = express()
+class App {
+  public express: express.Application = express()
 
-app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
-app.use(express.static(path.join(__dirname, '../public')))
+  constructor() {
+    this.middleWareInit()
+    this.routerInit()
+  }
 
-app.use('/', apiRouter)
+  /**
+   * middleware系初期化
+   */
+  private middleWareInit() {
+    // viewEngineは今回使わないのでスルー
+    // view engine setup
+    // express.set('views', path.join(__dirname, 'views'))
+    // express.set('view engine', 'jade')
 
-export = app
+    this.express.use(logger('dev'))
+    this.express.use(express.json())
+    this.express.use(express.urlencoded({ extended: false }))
+    this.express.use(cookieParser())
+    this.express.use(express.static(path.join(__dirname, 'public')))
+  }
+
+  /**
+   * router初期化
+   */
+  private routerInit() {
+    this.express.use('/', apiRouter)
+  }
+}
+
+// appをexport
+export default new App().express
