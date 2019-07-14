@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-plumber": "^1.2.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.0",
+    "@types/morgan": "^1.7.35",
+    "cookie-parser": "^1.4.4",
+    "http": "^0.0.0"
+  }
+}
