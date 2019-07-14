@@ -4,14 +4,14 @@
  * Module dependencies.
  */
 import { default as app } from './app'
-import * as debug from 'debug'
+const debug = require('debug')('express-boilerplate-api:server')
 import * as http from 'http'
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000')
+const port: string = normalizePort(process.env.PORT || '3000')
 app.set('port', port)
 
 /**
@@ -31,8 +31,7 @@ server.on('listening', onListening)
 /**
  * Normalize a port into a number, string, or false.
  */
-
-function normalizePort(val) {
+function normalizePort(val: any) {
   const port = parseInt(val, 10)
 
   if (isNaN(port)) {
@@ -51,29 +50,25 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-
-function onError(error) {
+function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error
   }
 
-  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
+  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES': {
+    case 'EACCES':
       console.error(bind + ' requires elevated privileges')
       process.exit(1)
       break
-    }
-    case 'EADDRINUSE': {
+    case 'EADDRINUSE':
       console.error(bind + ' is already in use')
       process.exit(1)
       break
-    }
-    default: {
+    default:
       throw error
-    }
   }
 }
 
@@ -81,7 +76,7 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 function onListening() {
-  var addr = server.address()
+  var addr: any = server.address()
   var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
   debug('Listening on ' + bind)
 }
