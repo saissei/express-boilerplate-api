@@ -1,5 +1,10 @@
 node_modules/*
 log/*
 *.log
-config/*
+config
+!config/test.json
+!config/default.json
 .env
+!.vscode
+!.vscode/*.json
+coverage
