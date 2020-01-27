@@ -1,10 +1,9 @@
-import * as express from 'express'
-import { Request, Response, NextFunction } from 'express'
-const router: express.Router = express.Router()
+import express, { Router, Request, Response } from 'express';
+const router: Router = express.Router();
 
 /* GET home page. */
-router.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.json('success')
-})
+router.get('/', (req: Request, res: Response): void => {
+  res.sendStatus(200);
+});
 
-export { router }
+export { router };

@@ -1,41 +1,36 @@
-import * as express from 'express'
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const logger = require('morgan')
+import express, { Application } from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from '../logger/LoggerBase';
+import helmet from 'helmet';
 
-import { router as apiRouter } from '../routes/api'
+import { router as apiRouter } from '../routes/api';
 
 class App {
-  public express: express.Application = express()
+  public express: Application = express();
 
   constructor() {
-    this.middleWareInit()
-    this.routerInit()
+    this.middleWareInit();
+    this.routerInit();
   }
 
-  /**
-   * middleware系初期化
-   */
-  private middleWareInit() {
+  private middleWareInit(): void {
     // viewEngineは今回使わないのでスルー
     // view engine setup
     // express.set('views', path.join(__dirname, 'views'))
     // express.set('view engine', 'jade')
 
-    this.express.use(logger('dev'))
-    this.express.use(express.json())
-    this.express.use(express.urlencoded({ extended: false }))
-    this.express.use(cookieParser())
-    this.express.use(express.static(path.join(__dirname, 'public')))
+    this.express.use(logger.connectLogger('INFO'));
+    this.express.use(helmet());
+    this.express.use(express.json());
+    this.express.use(express.urlencoded({ extended: false }));
+    this.express.use(cookieParser());
+    this.express.use(express.static(path.join(__dirname, 'public')));
   }
 
-  /**
-   * router初期化
-   */
-  private routerInit() {
-    this.express.use('/', apiRouter)
+  private routerInit(): void {
+    this.express.use('/', apiRouter);
   }
 }
 
-// appをexport
-export default new App().express
+export default new App().express;
