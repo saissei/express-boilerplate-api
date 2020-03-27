@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from './App';
+import app from './app';
 import Debug from 'debug';
 import logger from '../logger/LoggerBase';
 const debug: Debug.Debugger = Debug('express-debug');
